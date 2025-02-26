@@ -1,0 +1,80 @@
+
+.sidebar {
+    width: 150px;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content:flex-start;
+    background-color: black; 
+    color: white;
+    padding-top: 100px;
+    position: fixed;
+    left: 0;
+    top: 0;
+}
+
+.sidebar li {
+    display: block;
+    color: white;
+    padding: 15px;
+    text-decoration: none;
+    transition: 0.3s;
+}
+
+.sidebar li:hover {
+    background-color: rgb(110, 11, 146) ; 
+    cursor: pointer;
+}
+
+.upload {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: auto;
+    margin-top: 100px;
+    background-color: white;
+    padding-bottom:10px;
+    width: 800px;
+    border-radius: 20px;
+    height: auto;
+}
+.upload h1{
+    display: block;
+    text-align: center;
+}
+.upload input{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+}
+.image{
+    width: 30px;
+    height: 30px;
+    display: inline;
+}
+.preview-image {
+    width: 200px;
+    height: auto;
+    margin-top: 10px;
+    border-radius: 10px;
+    border: 2px solid #3D0066;
+}
+.download-btn {
+    margin-top: 20px;
+    padding: 10px 15px;
+    background-color: #3D0066;
+    color: white;
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: bold;
+    border-radius: 5px;
+}
+
+.download-btn:hover {
+
+    background-color: #5A0099;
+}

@@ -11,7 +11,7 @@ const Navbar=()=> {
       />
       <ul className="nav-menu">
         <li>
-          <Link to="/home" className="link">Home</Link>
+          <Link to="/" className="link">Home</Link>
         </li>
         <li>
           <Link to="/create" className="link">Create Meme</Link>
@@ -24,7 +24,7 @@ const Navbar=()=> {
         </li>
         
       </ul>
-      <div ><Link to="/" className="nav-login" >login</Link></div>
+      <div ><Link to="/login" className="nav-login" >login</Link></div>
     </div>
   )
 }

@@ -21,11 +21,11 @@ function App() {
         <Navbar />
         <Routes>
           <Route
-            path='/'
+            path='/login'
             element={<LoginSignUp/>}
           />
           <Route
-            path="/home"
+            path="/"
             element={<Home/>}
           />
           <Route

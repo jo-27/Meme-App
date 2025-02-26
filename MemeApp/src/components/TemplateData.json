@@ -1,0 +1,25 @@
+[
+    {
+        "id":1,
+        "title":"cats",
+        "image":"/templates/cat1.png"
+    },
+    {
+        "id":2,
+        "title":"cats",
+        "image":"/templates/cat2.jpg"
+
+    },
+    {
+        "id":3,
+        "title":"dogs",
+        "image":"/templates/dog1.jpeg"
+
+    },
+    {
+        "id":4,
+        "title":"dogs",
+        "image":"/templates/dog2.jpg"
+
+    }
+]

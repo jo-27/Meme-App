@@ -1,14 +1,13 @@
-.container{
+.l{
     display: flex;
     flex-direction: column;
     margin: auto;
     margin-top: 200px;
-    background-color: #fff;
+    background-color: white;
     padding-bottom:10px;
     width: 450px;
     border-radius: 20px;
     height: 350px;
-    
 }
 .header{
     display: flex;

@@ -6,7 +6,7 @@ import "./css/LoginSignup.css"
 const LoginSignUp = () => {
   const [button,setButton]=useState("Sign up");
   return (
-    <div className="container">
+    <div className="l">
       <div className="header">
         <div className="text">{button}</div>
         <div className="underline"></div>

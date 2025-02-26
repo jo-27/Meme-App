@@ -1,0 +1,51 @@
+.container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 30px;
+    background:transparent; 
+    color: white;
+}
+.container img{
+    display: flex;
+    flex-direction: column;
+    width: 200px;
+    height: 200px;
+}
+.container h1{
+    color: rgb(253, 111, 134);
+    font-size: 50px;
+    text-align: center
+}
+.container p{
+    font-size: large;
+    text-align: center;
+}
+.btn{
+    padding:13px 10px;
+    border-radius: 50px;
+    background: linear-gradient(20deg,#1e90ff 10%, #6a0dad 40%,  #ff1493);
+    font-size:20px;
+    cursor:pointer;
+    transition: 0.3s ease-in-out;
+    text-decoration: none;
+    color: white;
+    width: 200px;
+    text-align: center
+}
+.btn:hover{
+    transform: scale(1.1);
+    cursor: pointer;
+    color:black;
+    font-weight: 800;
+}
+.container ul{
+    text-align: center;
+    list-style-type: none;
+    padding-top: 10px;
+    font-size: large;
+    color:#ea72b0
+}
+.container li{
+    padding: 7px;
+}
