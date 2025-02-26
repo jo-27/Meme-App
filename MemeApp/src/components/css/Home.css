@@ -39,13 +39,3 @@
     color:black;
     font-weight: 800;
 }
-.container ul{
-    text-align: center;
-    list-style-type: none;
-    padding-top: 10px;
-    font-size: large;
-    color:#ea72b0
-}
-.container li{
-    padding: 7px;
-}
