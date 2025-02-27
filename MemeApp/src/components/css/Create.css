@@ -1,6 +1,6 @@
 
 .sidebar {
-    width: 150px;
+    width: 200px;
     height: 100vh;
     display: flex;
     flex-direction: column;
@@ -9,6 +9,7 @@
     color: white;
     padding-top: 100px;
     position: fixed;
+    z-index: 1000;
     left: 0;
     top: 0;
 }
@@ -25,19 +26,53 @@
     background-color: rgb(110, 11, 146) ; 
     cursor: pointer;
 }
+.sub-sidebar {
+    display: flex;
+    flex-direction: column;
+    width: 250px;
+    background-color: #ffffff;
+    color:black;
+    text-align: center;
+    padding-left: 200px;
+    justify-content: flex-start;
+    position: fixed;
+    height: 100vh;
+  }
+  .sub-sidebar h3{
+    margin: 0;
+    color: #ffffff;
+    padding: 20px;
+    margin-bottom: 10px;
+    background-color: black;
+  }
+  
+  .sub-sidebar-item {
+    background: black;
+    color: #ffffff;
+    padding: 15px;
+  }
+  .sub-sidebar-image{
+    width: 100px;
+    height: 100px;
+  }
 
 .upload {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    margin: auto;
+    margin-left: 500px;
     margin-top: 100px;
     background-color: white;
     padding-bottom:10px;
-    width: 800px;
+    width: 600px;
     border-radius: 20px;
     height: auto;
+    position: fixed;
+    flex: 1;
+  border: 2px dashed #aaa;
+  padding: 20px;
+  text-align: center;
 }
 .upload h1{
     display: block;
@@ -56,8 +91,8 @@
     display: inline;
 }
 .preview-image {
-    width: 200px;
-    height: auto;
+    width: 300px;
+    height:350px;
     margin-top: 10px;
     border-radius: 10px;
     border: 2px solid #3D0066;

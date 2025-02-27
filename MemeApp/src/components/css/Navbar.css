@@ -9,7 +9,7 @@
     left: 0;
     height: 100px;
     width: 100%;
-    z-index: 1000;
+    z-index: 2000;
     margin-top: 0%;
     background: linear-gradient(
     180deg,rgb(0, 0, 0),rgb(110, 11, 146) 120%

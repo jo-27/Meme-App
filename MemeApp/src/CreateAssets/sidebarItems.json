@@ -1,0 +1,51 @@
+{
+    "sidebar": [
+      {
+        "name": "Image templates",
+        "type": "image",
+        "items": [
+          "/templates/imgtemp1.jpg",
+          "/templates/imgtemp2.jpg"
+        ]
+      },
+      {
+        "name": "Elements",
+        "type": "image",
+        "items": [
+          "/templates/element1.png",
+          "/templates/element2.png",
+          "/templates/element3.png",
+          "/templates/element4.webp"
+        ]
+      },
+      {
+        "name": "Add stickers",
+        "type": "image",
+        "items": [
+          "/templates/cat1.png",
+          "/templates/dog1.jpeg"
+        ]
+      },
+      {
+        "name": "Add GIFs",
+        "type": "image",
+        "items": [
+          "https://media.giphy.com/media/JIX9t2j0ZTN9S/giphy.gif",
+          "https://media.giphy.com/media/l0HUpt2s9Pclgt9Vm/giphy.gif"
+        ]
+      },
+      
+      {
+        "name": "Text templates",
+        "type": "text",
+        "items": [
+          "unakenna paa...nee paithiyam",
+          "na paatuku sivane nu thana da irundhen",
+          "nov mass na nee",
+          "chin tapak dum dum",
+          "ennenna solraan parunga..."
+        ]
+      }
+    ]
+  }
+  
