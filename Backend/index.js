@@ -10,7 +10,7 @@ const PORT = 3001;
 dotenv.config();
 app.use(express.json())
 mdb
-  .connect(process.env.MONGODB_URL)
+  .connect("mongodb+srv://joansharon:sharon%4004@merndemo.bajzf.mongodb.net/Meme-App")
   .then(() => {
     console.log("MBD sucess");
   })
