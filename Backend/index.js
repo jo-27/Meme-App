@@ -5,12 +5,12 @@ const bcrypt = require("bcrypt");
 const Signup=require("./models/signupSchema");
 const app = express();
 const cors=require("cors");
-app.use(cors());
+app.use(cors({ origin: "*" }));
 const PORT = 3001;
 dotenv.config();
 app.use(express.json())
 mdb
-  .connect("mongodb+srv://joansharon:sharon%4004@merndemo.bajzf.mongodb.net/Meme-App")
+  .connect(process.env.MONGODB_URL)
   .then(() => {
     console.log("MBD sucess");
   })
