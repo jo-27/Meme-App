@@ -13,7 +13,7 @@ const LoginSignUp = () => {
   const [password, setPass] = useState("");
   const handleSignup = async(event) => {
     event.preventDefault()
-    const req =await axios.post("http://localhost:3001/signup", {
+    const req =await axios.post("https://meme-app-1-kj6m.onrender.com/signup", {
       name: name,
       email: email,
       password: password,
