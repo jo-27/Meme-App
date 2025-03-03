@@ -5,7 +5,7 @@ const bcrypt = require("bcrypt");
 const Signup=require("./models/signupSchema");
 const app = express();
 const cors=require("cors");
-app.use(cors({ origin: "*" }));
+app.use(cors({ origin: "https://meme-app-rho.vercel.app/" }));
 const PORT = 3001;
 dotenv.config();
 app.use(express.json())
