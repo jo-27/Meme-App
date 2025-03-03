@@ -1,28 +1,26 @@
-
 import React, { useState } from "react";
 import usericon from "/login/user-icon.png";
 import passwordicon from "/login/password-icon.png";
 import emailicon from "/login/email-icon.webp";
-import "./css/LoginSignup.css"
-import {Link,useNavigate} from 'react-router-dom';
+import "./css/Login.css"
+import {useNavigate} from 'react-router-dom';
 import axios from "axios";
-const LoginSignUp = () => {
+
+const Login = () => {
   const navigate=useNavigate()
-  const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPass] = useState("");
   const handleSignup = async(event) => {
     event.preventDefault()
-    const req =await axios.post("http://localhost:3001/signup", {
-      name: name,
+    const req =await axios.post("http://localhost:3001/login", {
       email: email,
       password: password,
     });
     const message=req.data.message
-    const isSignup=req.data.isSignup
-    if(isSignup){
+    const isLogin=req.data.isLoggedin
+    if(isLogin){
       alert(message)
-      navigate("/Login")
+      navigate("/home")
     }
     else{
       alert(message)
@@ -31,17 +29,10 @@ const LoginSignUp = () => {
   return (
     <div className="l">
       <div className="header">
-        <div className="text">Sign In</div>
+        <div className="text">Login</div>
         <div className="underline"></div>
       </div>
       <form onSubmit={handleSignup} className="inputs">
-      <div className="input">
-            <img style={{width:"20px",height:"20px"}} src={usericon} alt="" />
-            <input id="firstName"
-                value={name}
-                onChange={(e) => setName(e.target.value)} type="text" placeholder="Enter Your Name"/>
-        </div>
-        
         <div className="input">
             <img style={{width:"20px",height:"30px"}} src={emailicon} alt="" />
             <input id="Email"
@@ -57,14 +48,11 @@ const LoginSignUp = () => {
         </div>
       
       <div className="submit-container">
-      <button type="submit" className="submit">Sign In</button>
-      <p>
-        Already have an account? <Link to="/login">Login</Link>
-      </p>
+      <button type="submit" className="submit">login</button>
       </div>
       </form>
     </div>
-  );
-};
+  )
+}
 
-export default LoginSignUp;
+export default Login

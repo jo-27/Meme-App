@@ -11,6 +11,7 @@ import Home from "./components/Home"
 import Create  from "./components/Create";
 import Saved from "./components/Saved";
 import Templates from "./components/Templates";
+import Login from "./components/Login";
 
 function App() {
   // const [count, setCount] = useState(0)
@@ -39,6 +40,10 @@ function App() {
           <Route
             path="/saved"
             element={<Saved/>}
+          />
+          <Route
+            path="/login"
+            element={<Login/>}
           />
         </Routes>
       </BrowserRouter>

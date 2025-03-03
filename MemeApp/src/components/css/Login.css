@@ -29,15 +29,15 @@
     border-radius: 9px;
 }
 .inputs{
-    margin-top:20px;
+    margin-top:60px;
     display: flex;
     flex-direction: column;
-    gap: 20px;
+    gap: 30px;
 }
 .input{
     display: flex;
     align-items: center;
-    margin:auto;
+    margin-top:auto;
     width: 300px;
     height: 40px;
     background: #eaeaea;
@@ -75,7 +75,8 @@
     font-size: 19px;
     font-weight: 700;
     cursor: pointer;
-    padding-bottom: 10px;
+    padding: 5px 10px;
+    transition: 0.3s ease-in-out;
 }
 .submit:hover{
     color: #000000;
