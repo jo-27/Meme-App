@@ -1,8 +1,7 @@
 import React, { useState } from "react";
-import usericon from "/login/user-icon.png";
 import passwordicon from "/login/password-icon.png";
 import emailicon from "/login/email-icon.webp";
-import "./css/Login.css"
+import "./css/LoginSignup.css"
 import {useNavigate} from 'react-router-dom';
 import axios from "axios";
 

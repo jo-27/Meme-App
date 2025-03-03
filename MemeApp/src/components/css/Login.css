@@ -1,4 +1,4 @@
-.l{
+/* .ll{
     display: flex;
     flex-direction: column;
     margin: auto;
@@ -7,9 +7,9 @@
     padding-bottom:10px;
     width: 450px;
     border-radius: 20px;
-    height: 400px;
+    height: 500px;
 }
-.header{
+.headerl{
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -17,24 +17,24 @@
     width:100%;
     margin-top:30px;
 }
-.text{
+.textl{
     color:rgb(103, 37, 103);
     font-size: 30px;
     font-weight: 700;
 }
-.underline{
+.underlinel{
     width:90px;
     height: 6px;
     background: purple;
     border-radius: 9px;
 }
-.inputs{
+.inputsl{
     margin-top:60px;
     display: flex;
     flex-direction: column;
     gap: 30px;
 }
-.input{
+.inputl{
     display: flex;
     align-items: center;
     margin-top:auto;
@@ -43,11 +43,11 @@
     background: #eaeaea;
     border-radius: 6px;
 }
-.input img{
+.input1 img{
     margin:0px 30px;
 }
 
-.input input{
+.input1 input{
     height: 40px;
     width: 300px;
     background: transparent;
@@ -56,14 +56,14 @@
     color: black;
     font-size: 15px;
 }
-.submit-container{
+.submit-containerl{
     display: flex;
     flex-direction: column;
     gap:10px;
     margin: 30px auto;
     align-items: center;
 }
-.submit{
+.submitl{
     display: flex;
     justify-content: center;
     align-items: center;
@@ -78,12 +78,12 @@
     padding: 5px 10px;
     transition: 0.3s ease-in-out;
 }
-.submit:hover{
+.submitl:hover{
     color: #000000;
     font-size: 22px;
     transition: .2s ease-in-out;
 }
-.gray{
+.grayl{
     background: white;
     color: black;
-}
+} */

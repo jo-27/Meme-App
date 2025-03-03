@@ -7,19 +7,19 @@
     padding-bottom:10px;
     width: 450px;
     border-radius: 20px;
-    height: 400px;
+    height: 360px;
 }
 .header{
     display: flex;
     flex-direction: column;
-    align-items: center;
+    align-items:center;
     gap:9px;
     width:100%;
-    margin-top:30px;
+    margin-top:20px;
 }
 .text{
     color:rgb(103, 37, 103);
-    font-size: 30px;
+    font-size: 20px;
     font-weight: 700;
 }
 .underline{
@@ -29,7 +29,7 @@
     border-radius: 9px;
 }
 .inputs{
-    margin-top:20px;
+    margin-top:30px;
     display: flex;
     flex-direction: column;
     gap: 20px;
@@ -59,8 +59,7 @@
 .submit-container{
     display: flex;
     flex-direction: column;
-    gap:10px;
-    margin: 30px auto;
+    margin: 10px auto;
     align-items: center;
 }
 .submit{
@@ -75,12 +74,7 @@
     font-size: 19px;
     font-weight: 700;
     cursor: pointer;
-    padding-bottom: 10px;
-}
-.submit:hover{
-    color: #000000;
-    font-size: 22px;
-    transition: .2s ease-in-out;
+    padding: 10px;
 }
 .gray{
     background: white;
