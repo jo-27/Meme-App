@@ -6,12 +6,13 @@ import {useNavigate} from 'react-router-dom';
 import axios from "axios";
 
 const Login = () => {
+  const API_BASE_URL ="https://meme-app-1-kj6m.onrender.com";
   const navigate=useNavigate()
   const [email, setEmail] = useState("");
   const [password, setPass] = useState("");
   const handleSignup = async(event) => {
     event.preventDefault()
-    const req =await axios.post("http://localhost:3001/login", {
+    const req =await axios.post(`${API_BASE_URL}/login`, {
       email: email,
       password: password,
     });
