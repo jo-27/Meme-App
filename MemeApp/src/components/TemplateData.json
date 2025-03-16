@@ -21,5 +21,26 @@
         "title":"dogs",
         "image":"/templates/dog2.jpg"
 
+    },
+    {
+        "id":5,
+        "title":"vadivel",
+        "image":"/templates/v1.jpeg"
+    },
+    {
+        "id":6,
+        "title":"vadivel",
+        "image":"/templates/v2.jpeg"
+    },
+    {
+        "id":7,
+        "title":"vadivel",
+        "image":"/templates/v3.jpeg"
+
+    },
+    {
+        "id":8,
+        "title":"vadivel",
+        "image":"/templates/v4.jpeg"
     }
 ]

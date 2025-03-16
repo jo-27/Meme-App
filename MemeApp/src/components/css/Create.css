@@ -114,3 +114,20 @@
 
     background-color: #5A0099;
 }
+
+.draggable-image {
+  width: 100px;  /* Default width */
+  height: auto;  /* Maintain aspect ratio */
+  transition: transform 0.2s ease-in-out;
+}
+
+.draggable-image:hover {
+  transform: scale(1.1);  /* Slightly increase size on hover */
+}
+
+.resizable {
+  position: absolute;
+  resize: both; /* Enables resizing */
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.5);
+}

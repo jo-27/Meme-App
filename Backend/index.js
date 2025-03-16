@@ -1,45 +1,52 @@
+
 const express = require("express");
 const mdb = require("mongoose");
-const dotenv=require('dotenv');
+const dotenv = require("dotenv");
 const bcrypt = require("bcrypt");
-const Signup=require("./models/signupSchema");
-const app = express();
-const cors=require("cors");
-app.use(cors());
-const PORT = 3001;
+const Signup = require("./models/signupSchema");
+const Meme = require("./models/MemeSchema"); // New Meme model
+const cors = require("cors");
+
 dotenv.config();
-app.use(express.json())
+const app = express();
+app.use(cors());
+app.use(express.json());
+
 mdb
   .connect(process.env.MONGODB_URL)
-  .then(() => {
-    console.log("MBD sucess");
-  })
-  .catch((err) => {
-    console.log("cheack you string", err);
-  });
+  .then(() => console.log("MongoDB Connected"))
+  .catch((err) => console.log("MongoDB Connection Error:", err));
 
-app.get("/", (req, res) => {
-  res.send("<h1>welcome back<h1>");
-});
+const PORT = 3001;
 
-app.post("/signup",async(req,res)=>{
-    try {
-        const {name,email,password}=req.body;
-        const hashedPassword = await bcrypt.hash(password, 10);
-    const newSignup=new Signup({
-        name:name,
-        email:email,
-        password:hashedPassword
-    });
-    await newSignup.save()
-    console.log("signup sucess")
-    res.status(201).json({message:"Signup Successfull",isSignup:true})
-        
-    } catch (error) {
-        res.status(201).json({message:"Signup UnSuccessfull",isSignup:false})
+// Save meme route
+app.post("/save-meme", async (req, res) => {
+  try {
+    const { email, imageUrl } = req.body;
+    if (!email || !imageUrl) {
+      return res.status(400).json({ message: "Missing email or image URL" });
     }
 
-})
+    const newMeme = new Meme({ email, imageUrl });
+    await newMeme.save();
+
+    res.status(201).json({ message: "Meme saved successfully" });
+  } catch (error) {
+    res.status(500).json({ message: "Error saving meme", error });
+  }
+});
+
+// Fetch saved memes
+app.get("/my-memes/:email", async (req, res) => {
+  try {
+    const { email } = req.params;
+    const memes = await Meme.find({ email });
+
+    res.status(200).json(memes);
+  } catch (error) {
+    res.status(500).json({ message: "Error fetching memes", error });
+  }
+});
 
 app.post("/login", async(req, res) => {
   try {
@@ -68,4 +75,22 @@ app.post("/login", async(req, res) => {
   }
 });
 
-app.listen(PORT, () => console.log("server started successfully"));
+app.post("/signup",async(req,res)=>{
+    try {
+        const {name,email,password}=req.body;
+        const hashedPassword = await bcrypt.hash(password, 10);
+    const newSignup=new Signup({
+        name:name,
+        email:email,
+        password:hashedPassword
+    });
+    await newSignup.save()
+    console.log("signup sucess")
+    res.status(201).json({message:"Signup Successfull",isSignup:true})
+        
+    } catch (error) {
+        res.status(201).json({message:"Signup UnSuccessfull",isSignup:false})
+    }
+
+})
+app.listen(PORT, () => console.log(`Server running on port ${PORT}`));

@@ -7,13 +7,14 @@ import "./css/LoginSignup.css"
 import {Link,useNavigate} from 'react-router-dom';
 import axios from "axios";
 const LoginSignUp = () => {
+  const API_BASE_URL ="https://meme-app-1-kj6m.onrender.com";
   const navigate=useNavigate()
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPass] = useState("");
   const handleSignup = async(event) => {
     event.preventDefault()
-    const req =await axios.post("https://meme-app-1-kj6m.onrender.com/signup", {
+    const req =await axios.post(`${API_BASE_URL}/signup`, {
       name: name,
       email: email,
       password: password,
