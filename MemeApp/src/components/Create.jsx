@@ -2,16 +2,39 @@
 import React, { useState, useEffect } from "react";
 import Draggable from "react-draggable";
 import html2canvas from "html2canvas";
-import axios from "axios"; // Import axios
+import axios from "axios";
 import sidebarData from "../CreateAssets/sidebarItems.json";
 import "./css/Create.css";
 
-const Create = ({ userEmail }) => {
+const Create = () => {
+  const API_BASE_URL ="https://meme-app-1-kj6m.onrender.com";
   const [preview, setPreview] = useState(null);
   const [selectedCategory, setSelectedCategory] = useState(null);
   const [selectedItems, setSelectedItems] = useState([]);
   const [isShareMenuOpen, setIsShareMenuOpen] = useState(false);
   
+  const saveMeme = async () => {
+    const token = localStorage.getItem("token");
+    if (!token) {
+      alert("You need to be logged in to save memes.");
+      return;
+    }
+  
+    const dataUrl = await generateMemeImage();
+    if (!dataUrl) return;
+  
+    try {
+      await axios.post(
+        `${API_BASE_URL}/save-meme`,
+        { imageUrl: dataUrl },
+        { headers: { Authorization: token } }
+      );
+      alert("Meme saved successfully!");
+    } catch (error) {
+      console.error("Error saving meme", error);
+      alert("Failed to save meme.");
+    }
+  };
 
   const handleFileChange = (event) => {
     const file = event.target.files[0];
@@ -29,7 +52,6 @@ const Create = ({ userEmail }) => {
     ]);
   };
 
-  // Generate meme image
   const generateMemeImage = async () => {
     const memeElement = document.getElementById("meme-editor");
     if (!memeElement) return null;
@@ -38,35 +60,6 @@ const Create = ({ userEmail }) => {
     return canvas.toDataURL("image/png");
   };
 
-  // Function to save meme
-  const saveMeme = async () => {
-    const userEmail = localStorage.getItem("userEmail");
-    if (!userEmail) {
-      alert("You need to log in to save memes.");
-      return;
-    }
-  
-    const dataUrl = await generateMemeImage();
-    if (!dataUrl) return;
-  
-    try {
-      const response = await axios.post("http://localhost:3001/save-meme", {
-        email: userEmail,
-        imageUrl: dataUrl,
-      });
-  
-      alert("Meme saved successfully!");
-      
-      // Update local storage with new meme
-      const savedMemes = JSON.parse(localStorage.getItem("savedMemes")) || [];
-      savedMemes.push({ imageUrl: dataUrl });
-      localStorage.setItem("savedMemes", JSON.stringify(savedMemes));
-    } catch (error) {
-      console.error("Error saving meme:", error);
-    }
-  };
-
-  // Function to download the meme
   const downloadMeme = async () => {
     const dataUrl = await generateMemeImage();
     if (!dataUrl) return;
@@ -100,13 +93,12 @@ const Create = ({ userEmail }) => {
       window.open(tweetUrl, "_blank");
     } else if (platform === "facebook") {
       alert("Facebook does not allow direct image sharing. Download the meme and upload it manually.");
-      downloadMeme(); // Download the meme first
+      downloadMeme(); 
     }
   };
 
   return (
     <div className="create-container">
-      {/* Sidebar */}
       <div className="sidebar">
         {sidebarData.sidebar.map((category, index) => (
           <li key={index} onClick={() => setSelectedCategory(category)}>
@@ -115,7 +107,6 @@ const Create = ({ userEmail }) => {
         ))}
       </div>
 
-      {/* Sub-sidebar */}
       {selectedCategory && (
         <div className="sub-sidebar">
           <h3>{selectedCategory.name}</h3>
@@ -133,7 +124,6 @@ const Create = ({ userEmail }) => {
         </div>
       )}
 
-      {/* Upload Section */}
       <div className="upload">
         <h1>
           <img src="/icons/Upload-Icon.png" alt="upload icon" className="image" />
@@ -141,7 +131,6 @@ const Create = ({ userEmail }) => {
         </h1>
         <input type="file" onChange={handleFileChange} accept="image/*" />
 
-        {/* Meme Editor */}
         <div id="meme-editor" className="meme-editor">
           {preview && <img src={preview} alt="Preview" className="preview-image" />}
 
@@ -158,7 +147,6 @@ const Create = ({ userEmail }) => {
           ))}
         </div>
 
-        {/* Buttons Section */}
         <div className="buttons">
           <button className="download-btn" onClick={downloadMeme}>
             Download

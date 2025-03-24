@@ -4,13 +4,16 @@ const mdb = require("mongoose");
 const dotenv = require("dotenv");
 const bcrypt = require("bcrypt");
 const Signup = require("./models/signupSchema");
-const Meme = require("./models/MemeSchema"); // New Meme model
+const Meme = require("./models/MemeSchema"); 
 const cors = require("cors");
+const jwt = require("jsonwebtoken");
+const bodyParser = require("body-parser");
 
 dotenv.config();
 const app = express();
 app.use(cors());
-app.use(express.json());
+app.use(bodyParser.json({ limit: "10mb" })); // Change limit to 10MB (or more)
+app.use(bodyParser.urlencoded({ limit: "10mb", extended: true }));
 
 mdb
   .connect(process.env.MONGODB_URL)
@@ -19,15 +22,29 @@ mdb
 
 const PORT = 3001;
 
-// Save meme route
-app.post("/save-meme", async (req, res) => {
+const authMiddleware = (req, res, next) => {
+  const token = req.header("Authorization");
+  if (!token) {
+    return res.status(401).json({ message: "Access Denied" });
+  }
+
   try {
-    const { email, imageUrl } = req.body;
-    if (!email || !imageUrl) {
-      return res.status(400).json({ message: "Missing email or image URL" });
+    const verified = jwt.verify(token, "your_jwt_secret");
+    req.user = verified;
+    next();
+  } catch (error) {
+    res.status(400).json({ message: "Invalid Token" });
+  }
+};
+
+app.post("/save-meme", authMiddleware, async (req, res) => {
+  try {
+    const { imageUrl } = req.body;
+    if (!req.user || !req.user.email || !imageUrl) {
+      return res.status(400).json({ message: "Invalid request" });
     }
 
-    const newMeme = new Meme({ email, imageUrl });
+    const newMeme = new Meme({ email: req.user.email, imageUrl });
     await newMeme.save();
 
     res.status(201).json({ message: "Meme saved successfully" });
@@ -36,42 +53,56 @@ app.post("/save-meme", async (req, res) => {
   }
 });
 
-// Fetch saved memes
-app.get("/my-memes/:email", async (req, res) => {
+app.get("/my-memes", authMiddleware, async (req, res) => {
   try {
-    const { email } = req.params;
-    const memes = await Meme.find({ email });
+    const memes = await Meme.find({ email: req.user.email });
 
-    res.status(200).json(memes);
+    res.status(200).json({ success: true, memes });
   } catch (error) {
-    res.status(500).json({ message: "Error fetching memes", error });
+    console.error("❌ Error fetching memes:", error);
+    res.status(500).json({ success: false, message: "Error fetching memes" });
   }
 });
 
-app.post("/login", async(req, res) => {
+app.post("/login", async (req, res) => {
   try {
-    const{email,password}=req.body
-    const exitingUser=await Signup.findOne({email:email})
-    console.log(exitingUser)
-    if(exitingUser){
-      const isValidPassword=await bcrypt.compare(password,exitingUser.password)
-      if(isValidPassword){
-        const payload={
-          firstname:exitingUser.firstName,
-          email:exitingUser.email
-        }
-        res.status(201).json({message:"login successfull",isLoggedin:true})
-      }
-      else{
-        res.status(201).json({message:"incorrect password",isLoggedin:false})
-      }
+    const { email, password } = req.body;
+    const existingUser = await Signup.findOne({ email });
+
+    if (!existingUser) {
+      return res.status(404).json({ message: "User not found, sign up first", isLoggedin: false });
     }
-    else{
-      res.status(201).json({message:"user not found sigup first",isLoggedin:false})
+
+    const isValidPassword = await bcrypt.compare(password, existingUser.password);
+    if (!isValidPassword) {
+      return res.status(401).json({ message: "Incorrect password", isLoggedin: false });
     }
+
+    // **Create Payload for JWT**
+    const payload = {
+      firstname: existingUser.name,
+      email: existingUser.email
+    };
+
+    // **Sign JWT Token** (expires in 1 hour)
+    const token = jwt.sign(payload, "your_jwt_secret", { expiresIn: "1h" });
+    console.log("Login Response:", { 
+      message: "Login successful",
+      isLoggedin: true,
+      token,
+      email: existingUser.email,   // 🔄 FIX: Ensure `firstname` is included
+    });
+    // **Send Token and User Info to Frontend**
+    res.status(200).json({ 
+      message: "Login successful", 
+      isLoggedin: true, 
+      token, 
+      email: existingUser.email 
+    });
+
   } catch (error) {
-    console.log("login error");
-    res.status(400).json({message:"login error check your code",isLoggedin:false})
+    console.log("Login error:", error);
+    res.status(500).json({ message: "Login error, check your code", isLoggedin: false });
   }
 });
 

@@ -16,9 +16,15 @@ const Login = () => {
       email: email,
       password: password,
     });
+    // const req =await axios.post("http://localhost:3001/login", {
+    //   email: email,
+    //   password: password,
+    // });
     const message=req.data.message
     const isLogin=req.data.isLoggedin
     if(isLogin){
+      localStorage.setItem("token",req.data.token);
+      localStorage.setItem("userEmail",req.data.email);
       alert(message)
       navigate("/home")
     }
