@@ -35,6 +35,5 @@
 .btn:hover{
     transform: scale(1.1);
     cursor: pointer;
-    color:black;
-    font-weight: 800;
+    font-weight: 500;
 }

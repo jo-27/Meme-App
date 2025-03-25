@@ -16,10 +16,6 @@ const Login = () => {
       email: email,
       password: password,
     });
-    // const req =await axios.post("http://localhost:3001/login", {
-    //   email: email,
-    //   password: password,
-    // });
     const message=req.data.message
     const isLogin=req.data.isLoggedin
     if(isLogin){
@@ -54,7 +50,7 @@ const Login = () => {
         </div>
       
       <div className="submit-container">
-      <button type="submit" className="submit">login</button>
+      <button type="submit" className="submit">Login</button>
       </div>
       </form>
     </div>

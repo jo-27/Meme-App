@@ -2,6 +2,11 @@ import React from 'react'
 import { Link } from "react-router-dom";
 import "./css/Navbar.css"
 const Navbar=()=> {
+  const handleLogout = () => {
+    localStorage.removeItem("token"); 
+    alert("You have been logged out.");
+    navigate("/login"); 
+  };
   return (
     <div className="navbar">
       <img
@@ -24,7 +29,7 @@ const Navbar=()=> {
         </li>
         
       </ul>
-      <div ><Link to="/" className="nav-login" >login</Link></div>
+      <div ><Link to="/"><button className="nav-login">Login</button></Link><button className="nav-login" onClick={handleLogout}>LogOut</button></div>
     </div>
   )
 }

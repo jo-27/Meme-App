@@ -1,9 +1,15 @@
 import React from 'react'
 import { useState } from 'react'
+import { useNavigate } from 'react-router-dom';
 import data from "./TemplateData.json"
 import './css/Templates.css'
 const Templates = () => {
   const [searchTerm,setSearchTerm]=useState("");
+  const navigate = useNavigate();
+
+  const handleTemplateClick = (image) => {
+    navigate("/create", { state: { templateImage: image } });
+  };
   return (
     <div>
       <div className="templateContainer">
@@ -24,7 +30,7 @@ const Templates = () => {
               })
               .map((val) => {
                 return(
-                  <div className="template" key={val.id}>
+                  <div className="template" key={val.id} onClick={() => handleTemplateClick(val.image)}>
                       <img src={val.image} alt="" />
                   </div> 
                 )

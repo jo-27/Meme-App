@@ -1,1 +1,58 @@
 
+.saved-container {
+    padding: 20px;
+    text-align: center;
+  }
+  
+  .saved-container h2 {
+    font-size: 24px;
+    margin-bottom: 20px;
+    color: #333;
+  }
+  
+  .meme-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 15px;
+    justify-content: center;
+    padding: 10px;
+  }
+  
+  .meme-item {
+    background: #fff;
+    border-radius: 10px;
+    padding: 10px;
+    box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s ease-in-out;
+  }
+  
+  .meme-item:hover {
+    transform: scale(1.05);
+  }
+  
+  .meme-item img {
+    width: 100%;
+    border-radius: 10px;
+  }
+  
+  .button-group {
+    margin-top: 10px;
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+  }
+  
+  .button-group button {
+    background: #3D0066;
+    color: white;
+    border: none;
+    padding: 8px 12px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background 0.3s ease-in-out;
+  }
+  
+  .button-group button:hover {
+    background: #5A0099;
+  }
+  

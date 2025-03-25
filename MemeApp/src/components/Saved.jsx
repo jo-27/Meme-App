@@ -1,9 +1,13 @@
+
 import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom"; 
 import axios from "axios";
+import './css/Saved.css'
 
 const Saved = () => {
   const [memes, setMemes] = useState([]);
   const API_BASE_URL = "https://meme-app-1-kj6m.onrender.com";
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchMemes = async () => {
@@ -32,13 +36,37 @@ const Saved = () => {
     fetchMemes();
   }, []);
 
+  // Function to download meme
+  const downloadMeme = (imageUrl, index) => {
+    const link = document.createElement("a");
+    link.href = imageUrl;
+    link.download = `meme_${index + 1}.png`;
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  };
+
+  // Function to navigate to Create page and set preview image
+  const handleTemplateClick = (image) => {
+    navigate("/create", { state: { templateImage: image } });
+  };
+
   return (
-    <div>
-      <h2>My Saved Memes</h2>
-      <div style={{ display: "flex", flexWrap: "wrap", gap: "10px" }}>
+    <div className="saved-container">
+      <div className="meme-grid">
         {memes.length > 0 ? (
           memes.map((meme, index) => (
-            <img key={index} src={meme.imageUrl} alt="Meme" style={{ width: "200px" }} />
+            <div key={index} className="meme-item">
+              <img src={meme.imageUrl} alt="Meme" />
+              <div className="button-group">
+                <button onClick={() => downloadMeme(meme.imageUrl, index)}>
+                  Download
+                </button>
+                <button onClick={() => handleTemplateClick(meme.imageUrl)}>
+                  Edit
+                </button>
+              </div>
+            </div>
           ))
         ) : (
           <p>No memes saved yet.</p>

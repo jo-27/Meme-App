@@ -1,18 +1,32 @@
 
 import React, { useState, useEffect } from "react";
 import Draggable from "react-draggable";
+import { useLocation } from "react-router-dom";
 import html2canvas from "html2canvas";
 import axios from "axios";
 import sidebarData from "../CreateAssets/sidebarItems.json";
 import "./css/Create.css";
 
 const Create = () => {
+  const location = useLocation();
+  const templateImage = location.state?.templateImage || null;
   const API_BASE_URL ="https://meme-app-1-kj6m.onrender.com";
-  const [preview, setPreview] = useState(null);
+  const [preview, setPreview] = useState(templateImage);
   const [selectedCategory, setSelectedCategory] = useState(null);
   const [selectedItems, setSelectedItems] = useState([]);
   const [isShareMenuOpen, setIsShareMenuOpen] = useState(false);
   
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (!event.target.closest(".share-menu") && !event.target.closest(".download-btn")) {
+        setIsShareMenuOpen(false);
+      }
+    };
+  
+    document.addEventListener("click", handleClickOutside);
+    return () => document.removeEventListener("click", handleClickOutside);
+  }, []);
+
   const saveMeme = async () => {
     const token = localStorage.getItem("token");
     if (!token) {
@@ -69,31 +83,23 @@ const Create = () => {
     link.download = "meme.png";
     link.click();
   };
-
-    const shareMeme = async (platform) => {
+  const shareMeme = async (platform) => {
     const dataUrl = await generateMemeImage();
     if (!dataUrl) return;
-
+  
+    const blob = await fetch(dataUrl).then((res) => res.blob());
+    const file = new File([blob], "meme.png", { type: "image/png" });
+  
     if (platform === "whatsapp") {
-      const blob = await fetch(dataUrl).then((res) => res.blob());
-      const file = new File([blob], "meme.png", { type: "image/png" });
-
-      if (navigator.canShare && navigator.canShare({ files: [file] })) {
-        navigator.share({
-          files: [file],
-          title: "Check out my meme!",
-          text: "I created this meme, check it out!",
-        });
-      } else {
-        alert("Sharing is not supported on this browser. Try downloading the image and sharing manually.");
-      }
+      const whatsappUrl = `https://wa.me/?text=Check%20out%20this%20meme!%20😂%20&url=${dataUrl}`;
+      window.open(whatsappUrl, "_blank");
     } else if (platform === "twitter") {
       const tweetText = encodeURIComponent("Check out my meme! 😂 #Meme");
       const tweetUrl = `https://twitter.com/intent/tweet?text=${tweetText}`;
       window.open(tweetUrl, "_blank");
     } else if (platform === "facebook") {
       alert("Facebook does not allow direct image sharing. Download the meme and upload it manually.");
-      downloadMeme(); 
+      downloadMeme();
     }
   };
 

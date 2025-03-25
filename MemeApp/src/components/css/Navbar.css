@@ -65,6 +65,7 @@
     transition: 0.3s ease-in-out;
     text-decoration: none;
     color: white;
+    margin-left: 5px;
   }
   .nav-login:hover{
     transform: scale(1.1);

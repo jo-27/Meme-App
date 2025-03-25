@@ -76,6 +76,12 @@
     cursor: pointer;
     padding: 10px;
 }
+.submit:hover{
+    font-size: 22px;
+    width: 160px;
+    height: 50px;
+    transition: 0.3s ease-in-out;
+}
 .gray{
     background: white;
     color: black;
